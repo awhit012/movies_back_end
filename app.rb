@@ -1,7 +1,8 @@
 require 'sinatra'
 
-get '/'
-  File.read('index.html')
+
+get '/' do
+  File.read(File.join('./views', 'index.html'))
 end
 
 get 'favorites' do
@@ -11,8 +12,7 @@ end
 
 get '/favorites' do
   file = JSON.parse(File.read('data.json'))
-  unless params[:name] && params[:oid]
-    return 'Invalid Request'
+  return 'Invalid Request' unless params[:name] && params[:oid]
   movie = { name: params[:name], oid: params[:oid] }
   file << movie
   File.write('data.json',JSON.pretty_generate(file))
