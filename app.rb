@@ -2,6 +2,7 @@ require 'sinatra'
 require 'json'
 require 'httparty'
 require 'sinatra/cross_origin'
+require 'sinatra/multi_route'
 
 
 configure do
@@ -18,12 +19,10 @@ get '/favorites' do
   File.read('data.json')
 end
 
-post '/favorite' do
+route :post, :options, '/favorite' do
   content_type :json
-  # p JSON.parse(response.body.read)
   p response
   p params
-  p params.to_json
 
   # file = JSON.parse(File.read('data.json'))
   # return 'Invalid Request' unless params[:name] && params[:oid]
@@ -32,3 +31,5 @@ post '/favorite' do
   # File.write('data.json',JSON.pretty_generate(file))
   # movie.to_json
 end
+
+
