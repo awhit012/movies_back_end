@@ -1,6 +1,12 @@
 require 'sinatra'
 require 'json'
 require 'httparty'
+require 'sinatra/cross_origin'
+
+
+configure do
+  enable :cross_origin
+end
 
 get '/' do
   File.read(File.join('./views', 'index.html'))
@@ -8,26 +14,11 @@ get '/' do
 end
 
 get '/favorites' do
-  response['Access-Control-Allow-Origin'] = '*'
   response.header['Content-Type'] = 'application/json'
   File.read('data.json')
 end
 
 post '/favorite' do
-  # response['Access-Control-Allow-Origin'] = 'http://domain.com'
-
-  request['Access-Control-Request-Method'] = '*'
-  request['Access-Control-Allow-Origin'] = '*'
-  response['Access-Control-Allow-Origin'] = '*'
-  request['Access-Control-Allow-Origin'] = 'file:///Users/awhit012/Desktop/instructor-code-challenge-master/js-frontend/index.html'
-  response['Access-Control-Allow-Origin'] = 'file:///Users/awhit012/Desktop/instructor-code-challenge-master/js-frontend/index.html'
-
-  response['Access-Control-Allow-Methods'] = 'POST, OPTIONS'
-  response['Access-Control-Request-Method'] = '*'
-  response['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-
-
-
   content_type :json
   # p JSON.parse(response.body.read)
   p response
