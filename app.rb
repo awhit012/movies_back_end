@@ -20,16 +20,13 @@ get '/favorites' do
 end
 
 route :post, :options, '/favorite' do
-  content_type :json
-  p response
-  p params
-
-  # file = JSON.parse(File.read('data.json'))
-  # return 'Invalid Request' unless params[:name] && params[:oid]
-  # movie = { name: params[:name], oid: params[:oid] }
-  # file << movie
-  # File.write('data.json',JSON.pretty_generate(file))
-  # movie.to_json
+  data = JSON.parse(request.body.read)
+  p data
+  file = JSON.parse(File.read('data.json'))
+  return 'Invalid Request' unless data['name'] && data['oid']
+  file[data['name']] = data['oid']
+  File.write('data.json', JSON.pretty_generate(file))
+  data
 end
 
 
