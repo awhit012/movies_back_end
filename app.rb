@@ -2,7 +2,9 @@ require 'sinatra'
 require 'json'
 
 before do
-  headers 'Access-Control-Allow-Origin' => 'http://awhit012.github.io'
+  # headers 'Access-Control-Allow-Origin' => 'http://awhit012.github.io'
+  headers 'Access-Control-Allow-Origin' => *
+
 end
 
 get '/' do
