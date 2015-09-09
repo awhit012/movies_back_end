@@ -1,10 +1,8 @@
 require 'sinatra'
 require 'json'
-require 'sinatra/cross_origin'
 
-
-configure do
-  enable :cross_origin
+before do
+  headers 'Access-Control-Allow-Origin' => '*'
 end
 
 get '/' do
