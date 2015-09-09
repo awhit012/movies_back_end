@@ -1,22 +1,24 @@
 require 'sinatra'
 require 'json'
 
-before do
+# before do
   # headers 'Access-Control-Allow-Origin' => 'http://awhit012.github.io'
-  headers 'Access-Control-Allow-Origin' => *
+  # headers 'Access-Control-Allow-Origin' => *
 
-end
+# end
 
 get '/' do
   File.read(File.join('./views', 'index.html'))
 end
 
 get '/favorites' do
+  headers 'Access-Control-Allow-Origin' => 'http://awhit012.github.io'
   response.header['Content-Type'] = 'application/json'
   File.read('data.json')
 end
 
 post '/favorite' do
+  headers 'Access-Control-Allow-Origin' => 'http://awhit012.github.io'
   data = JSON.parse(request.body.read)
   p data
   file = JSON.parse(File.read('data.json'))
